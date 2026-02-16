@@ -4,6 +4,9 @@
 .. image:: https://coveralls.io/repos/github/agronholm/exceptiongroup/badge.svg?branch=main
   :target: https://coveralls.io/github/agronholm/exceptiongroup?branch=main
   :alt: Code Coverage
+.. image:: https://tidelift.com/badges/package/pypi/exceptiongroup
+  :target: https://tidelift.com/subscription/pkg/pypi-exceptiongroup
+  :alt: Tidelift
 
 This is a backport of the ``BaseExceptionGroup`` and ``ExceptionGroup`` classes from
 Python 3.11.
