@@ -882,7 +882,13 @@ def test_exceptions_mutate_original_sequence():
 
     exceptions.append(KeyError("bar"))
     assert excgrp.exceptions is exc_tuple
-    assert repr(excgrp) == (
-        "BaseExceptionGroup('foo', [ValueError(1), KeyboardInterrupt(), "
-        "KeyError('bar')])"
-    )
+    if sys.version_info < (3, 11):
+        # On < 3.11, the backport is active and stores exceptions as a tuple,
+        # so repr reflects the original (unmutated) exceptions.
+        # On >= 3.11, native BaseExceptionGroup is used. Whether the repr
+        # shows original or mutated exceptions depends on the CPython version
+        # (cpython#141736 fixes it for 3.13.12+, but not yet in 3.14).
+        # We only assert the backport behavior since we control it.
+        assert repr(excgrp) == (
+            "BaseExceptionGroup('foo', [ValueError(1), KeyboardInterrupt()])"
+        )

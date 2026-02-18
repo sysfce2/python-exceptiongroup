@@ -275,7 +275,9 @@ class BaseExceptionGroup(BaseException, Generic[_BaseExceptionT_co]):
         return f"{self.message} ({len(self._exceptions)} sub-exception{suffix})"
 
     def __repr__(self) -> str:
-        return f"{self.__class__.__name__}({self.args[0]!r}, {self.args[1]!r})"
+        return (
+            f"{self.__class__.__name__}({self.args[0]!r}, {list(self._exceptions)!r})"
+        )
 
 
 class ExceptionGroup(BaseExceptionGroup[_ExceptionT_co], Exception):
